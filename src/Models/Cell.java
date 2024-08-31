@@ -3,6 +3,15 @@ package Models;
 public class Cell {
     private  int row;
     private  int col;
+    private  CellState cellState;
+    private  Player player;
+
+    public Cell(int row, int col) {
+        this.row = row;
+        this.col = col;
+        this.cellState = CellState.EMPTY;
+        this.player = null;
+    }
 
     public CellState getCellState() {
         return cellState;
@@ -35,7 +44,4 @@ public class Cell {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
-    private  CellState cellState;
-    private  Player player;
 }

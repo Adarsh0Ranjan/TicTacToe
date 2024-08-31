@@ -1,6 +1,10 @@
 package Models;
 
 public class Symbol {
+    public Symbol(char aChar) {
+        this.aChar = aChar;
+    }
+
     private char aChar;
 
     public char getaChar() {

@@ -8,19 +8,10 @@ public class Bot extends  Player {
 
     private BotPlayingStrategy botPlayingStrategy;
 
-    public BotDifficultyLevel getBotDifficultyLevel() {
-        return botDifficultyLevel;
-    }
 
-    public void setBotDifficultyLevel(BotDifficultyLevel botDifficultyLevel) {
+    public Bot(String name, Long id, Symbol symbol, BotDifficultyLevel botDifficultyLevel) {
+        super(name, id, symbol, PlayerType.BOT);
         this.botDifficultyLevel = botDifficultyLevel;
     }
 
-    public BotPlayingStrategy getBotPlayingStrategy() {
-        return botPlayingStrategy;
-    }
-
-    public void setBotPlayingStrategy(BotPlayingStrategy botPlayingStrategy) {
-        this.botPlayingStrategy = botPlayingStrategy;
-    }
 }

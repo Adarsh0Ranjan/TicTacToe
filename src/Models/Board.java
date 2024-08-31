@@ -11,6 +11,15 @@ public class Board {
     public Board(int size) {
         this.size = size;
         board = new ArrayList<>();
+
+        for(int i = 0; i<size; i++) {
+            List<Cell> cells = new ArrayList<>();
+            for(int j = 0; j < size; j++) {
+                Cell cell = new Cell(i, j);
+                cells.add(cell);
+            }
+            board.add(cells);
+        }
     }
 
     public int getSize() {

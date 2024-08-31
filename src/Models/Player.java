@@ -5,6 +5,14 @@ import java.util.Scanner;
 public class Player {
     private String name;
     private Long id;
+
+    public Player(String name, Long id, Symbol symbol, PlayerType playerType) {
+        this.name = name;
+        this.id = id;
+        this.symbol = symbol;
+        this.playerType = playerType;
+    }
+
     private Symbol symbol;
     private PlayerType playerType;
     private Scanner scanner;

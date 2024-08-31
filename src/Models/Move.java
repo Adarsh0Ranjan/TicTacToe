@@ -3,6 +3,11 @@ package Models;
 public class Move {
     private Cell cell;
 
+    public Move(Player player, Cell cell) {
+        this.player = player;
+        this.cell = cell;
+    }
+
     private Player player;
 
     public Cell getCell() {
