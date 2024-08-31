@@ -10,63 +10,71 @@ public class Game {
     private List<Move> moves;
     private Player winner;
     private GameState gameState;
-
-    public int getNextMovePlayerIndex() {
-        return nextMovePlayerIndex;
-    }
-
-    public void setNextMovePlayerIndex(int nextMovePlayerIndex) {
-        this.nextMovePlayerIndex = nextMovePlayerIndex;
-    }
+    private int nextMovePlayerIndex;
+    private List<WinningStrategy> winningStrategies;
 
     public Board getBoard() {
         return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
     }
 
     public List<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
-
     public List<Move> getMoves() {
         return moves;
-    }
-
-    public void setMoves(List<Move> moves) {
-        this.moves = moves;
     }
 
     public Player getWinner() {
         return winner;
     }
 
-    public void setWinner(Player winner) {
-        this.winner = winner;
-    }
-
     public GameState getGameState() {
         return gameState;
     }
 
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
+    public int getNextMovePlayerIndex() {
+        return nextMovePlayerIndex;
     }
 
     public List<WinningStrategy> getWinningStrategies() {
         return winningStrategies;
     }
 
-    public void setWinningStrategies(List<WinningStrategy> winningStrategies) {
-        this.winningStrategies = winningStrategies;
+    public static Builder getBuilder() {
+        return new Builder();
     }
 
-    private int nextMovePlayerIndex;
-    private List<WinningStrategy> winningStrategies;
+    public static class Builder {
+
+        private List<Player> players;
+
+        private int dimension;
+
+        private List<WinningStrategy> winningStrategies;
+
+        public Builder setPlayers(List<Player> players) {
+            this.players = players;
+            return this;
+        }
+
+        public Builder setDimenSion(int dimension) {
+            this.dimension = dimension;
+            return this;
+        }
+
+        public Builder setWinningStrategies(List<WinningStrategy> winningStrategies) {
+            this.winningStrategies = winningStrategies;
+            return this;
+        }
+
+        public Builder addPlayer(Player player) {
+            this.players.add(player);
+            return  this;
+        }
+
+        public Game build() {
+            return null;
+        }
+    }
 }
