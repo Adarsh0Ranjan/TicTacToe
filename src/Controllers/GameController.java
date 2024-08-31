@@ -15,7 +15,7 @@ public class GameController {
                           List<Player> players,
                           List<WinningStrategy> winningStrategies
                           ) {
-        return  new Game();
+        return null;
     }
 
     public void makeMove(Game game) {

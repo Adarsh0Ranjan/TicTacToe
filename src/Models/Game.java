@@ -1,7 +1,10 @@
 package Models;
 
+import Exceptions.MoreThanOneBotException;
+import Exceptions.PlayerCountMismatchException;
 import Stratgies.WinningStrategy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -12,6 +15,15 @@ public class Game {
     private GameState gameState;
     private int nextMovePlayerIndex;
     private List<WinningStrategy> winningStrategies;
+
+    private Game(int dimension, List<WinningStrategy> winningStrategies, List<Player> players) {
+        this.winningStrategies = winningStrategies;
+        this.players = players;
+        this.board = new Board(dimension);
+        this.moves = new ArrayList<>();
+        this.gameState = GameState.IN_PROGRESS;
+        this.nextMovePlayerIndex = 0;
+    }
 
     public Board getBoard() {
         return board;
@@ -73,8 +85,39 @@ public class Game {
             return  this;
         }
 
-        public Game build() {
-            return null;
+        // TODO: move validation logic in a separate
+        private void validateBotCount() throws Exception {
+             int botCount = 0;
+             for(Player player: players) {
+                 if (player.getPlayerType().equals(PlayerType.BOT)) {
+                     botCount++;
+                 }
+             }
+
+            if (botCount > 1) {
+                throw new MoreThanOneBotException();
+            }
+        }
+
+        private void validateUniqueSymbolForThePlayers() {
+
+        }
+
+        private void validatePlayerCount() throws  Exception {
+            if(players.size() != dimension - 1) {
+                throw new PlayerCountMismatchException();
+            }
+        }
+
+        private void validate() throws Exception {
+            validateBotCount();
+            validatePlayerCount();
+            validateUniqueSymbolForThePlayers();
+        }
+
+        public Game build() throws Exception {
+            validate();
+            return new Game(dimension, winningStrategies, players);
         }
     }
 }
