@@ -1,6 +1,5 @@
 package Controllers;
 
-
 import Models.Game;
 import Models.GameState;
 import Models.Player;
@@ -14,8 +13,12 @@ public class GameController {
     public Game startGame(int dimensionOfTheBoard,
                           List<Player> players,
                           List<WinningStrategy> winningStrategies
-                          ) {
-        return null;
+                          ) throws Exception {
+        return Game.getBuilder()
+                .setPlayers(players)
+                .setWinningStrategies(winningStrategies)
+                .setDimenSion(dimensionOfTheBoard)
+                .build();
     }
 
     public void makeMove(Game game) {
