@@ -57,6 +57,18 @@ public class Game {
         return new Builder();
     }
 
+    public void makeMove() {
+        Player currentPlayer = players.get(nextMovePlayerIndex);
+        System.out.println("It is " + currentPlayer.getName() + " 's move. Please make your move");
+
+        Move move = currentPlayer.makeMove(this.board);
+
+        // validate the move
+    }
+
+    private void validateMove() {
+
+    }
     public static class Builder {
 
         private List<Player> players;
@@ -119,5 +131,7 @@ public class Game {
             validate();
             return new Game(dimension, winningStrategies, players);
         }
+
+
     }
 }

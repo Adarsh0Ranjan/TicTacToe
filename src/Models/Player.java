@@ -11,6 +11,7 @@ public class Player {
         this.id = id;
         this.symbol = symbol;
         this.playerType = playerType;
+        this.scanner = new Scanner(System.in);
     }
 
     private Symbol symbol;
@@ -55,5 +56,15 @@ public class Player {
 
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
+    }
+
+    public Move makeMove(Board board) {
+        System.out.println("Please enter the row where you want to make the move");
+        int row = scanner.nextInt();
+
+        System.out.println("Please enter the col where you want to make the move");
+        int col = scanner.nextInt();
+
+       return new Move(this, new Cell(row, col));
     }
 }
