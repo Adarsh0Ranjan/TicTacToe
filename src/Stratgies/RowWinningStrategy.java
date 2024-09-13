@@ -26,4 +26,14 @@ public class RowWinningStrategy implements WinningStrategy {
 
         return false;
     }
+
+    public void handleUndo(Move move, Board board) {
+        int row = move.getCell().getRow();
+        Symbol symbol =  move.getPlayer().getSymbol();
+
+        Map<Symbol, Integer> countMap = map.get(row);
+
+        int countOfSymbol = countMap.get(symbol);
+        countMap.put(symbol, countOfSymbol - 1);
+    }
 }

@@ -37,4 +37,19 @@ public class DiagonalWinningStrategy implements WinningStrategy {
         }
         return isWinner;
     }
+
+    public void handleUndo(Move move, Board board) {
+        int col = move.getCell().getCol();
+        int row = move.getCell().getRow();
+        Symbol symbol =  move.getPlayer().getSymbol();
+        if(row == col) {
+            int countOfSymbol = leftDiag.get(symbol);
+            leftDiag.put(symbol, countOfSymbol -1);
+        }
+
+        if(row + col == board.getSize() - 1) {
+            int countOfSymbol = rightDiag.get(symbol);
+            rightDiag.put(symbol, countOfSymbol - 1);
+        }
+    }
 }

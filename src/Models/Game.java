@@ -132,6 +132,30 @@ public class Game {
         return false;
     }
 
+    public void undo() {
+        if(moves.size() == 0) {
+            System.out.println("No Moves To Do");
+            return;
+        }
+
+        Move lastMove = moves.get(moves.size() - 1);
+        moves.remove(lastMove);
+
+        // update the cell
+        Cell cellToChange = lastMove.getCell();
+        cellToChange.setCellState(CellState.EMPTY);
+        cellToChange.setPlayer(null);
+        for(WinningStrategy winningStrategy: winningStrategies) {
+            winningStrategy.handleUndo(lastMove, board);
+        }
+
+        nextMovePlayerIndex -= 1;
+        nextMovePlayerIndex = (nextMovePlayerIndex + players.size()) % players.size();
+
+
+
+    }
+
     public static class Builder {
 
         private List<Player> players;
