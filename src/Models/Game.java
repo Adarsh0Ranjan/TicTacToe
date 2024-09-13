@@ -61,14 +61,77 @@ public class Game {
         Player currentPlayer = players.get(nextMovePlayerIndex);
         System.out.println("It is " + currentPlayer.getName() + " 's move. Please make your move");
 
+        // move made by player
         Move move = currentPlayer.makeMove(this.board);
 
+        System.out.println(currentPlayer.getName() + " has made the move at row: " + move.getCell().getRow() + " and col: " + move.getCell().getCol());
         // validate the move
+        if(!validate(move)) {
+            System.out.println("Invalid move. Please try again");
+            return;
+        }
+
+        int row = move.getCell().getRow();
+        int col = move.getCell().getCol();
+
+        // update the cell
+        Cell cellToChange = board.getBoard().get(row).get(col);
+        cellToChange.setCellState(CellState.FILLED);
+        cellToChange.setPlayer(currentPlayer);
+
+        // validated move
+        Move finalMove = new Move(currentPlayer, cellToChange);
+
+        // add validated move to move list
+        this.moves.add(finalMove);
+
+        // update next turn, taking mod so that we can get the first player after reaching the last player
+        nextMovePlayerIndex = (this.nextMovePlayerIndex + 1) % players.size();
+
+        // check if there is a winner
+
+        if (checkWinner(finalMove, board)) {
+            winner = currentPlayer;
+            gameState = GameState.WIN;
+        } else if(moves.size() == board.getSize() * board.getSize()) {
+            gameState = GameState.DRAW;
+        }
+
     }
 
-    private void validateMove() {
+    // TODO: think about moving this to other class
+    private boolean validate(Move move) {
+        int row = move.getCell().getRow();
+        int col = move.getCell().getCol();
 
+        if(row >= board.getSize()) {
+            return  false;
+        }
+
+        if(col >= board.getSize()) {
+            return false;
+        }
+
+        if(this.gameState != GameState.IN_PROGRESS) {
+            return false;
+        }
+
+        if(board.getBoard().get(row).get(col).getCellState().equals(CellState.EMPTY)) {
+            return true;
+        }
+
+        return false;
     }
+
+    public boolean checkWinner(Move move, Board board) {
+        for(WinningStrategy winningStrategy: winningStrategies) {
+            if(winningStrategy.checkWinner(move, board)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static class Builder {
 
         private List<Player> players;
