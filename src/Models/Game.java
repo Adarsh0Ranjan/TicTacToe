@@ -151,9 +151,10 @@ public class Game {
 
         nextMovePlayerIndex -= 1;
         nextMovePlayerIndex = (nextMovePlayerIndex + players.size()) % players.size();
+    }
 
-
-
+    public void printBoard() {
+        board.printBoard();
     }
 
     public static class Builder {
